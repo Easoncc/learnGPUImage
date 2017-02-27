@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "CCRecorderViewController.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -77,7 +78,18 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-  
+    switch (indexPath.row) {
+        case 0:{
+            CCRecorderViewController *recorder = [CCRecorderViewController new];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:recorder];
+            [self.navigationController presentViewController:nav animated:YES completion:nil];
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
     
 }
 
