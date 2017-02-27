@@ -10,6 +10,7 @@
 
 @interface CCFiltersCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic ,strong) UIImageView *imageView;
+@property (nonatomic ,strong) UIImageView *iconImageView;
+@property (nonatomic ,strong) UILabel *titlesLabel;
 
 @end

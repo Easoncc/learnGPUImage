@@ -21,23 +21,45 @@
         
         self.contentView.backgroundColor = [UIColor clearColor];
         self.backgroundColor = [UIColor clearColor];
-        [self.contentView addSubview:self.imageView];
+        [self.contentView addSubview:self.iconImageView];
+        [self.contentView addSubview:self.titlesLabel];
         
     }
     return self;
 }
 
-- (UIImageView *)imageView{
+- (UIImageView *)iconImageView{
     
-    if (!_imageView) {
+    if (!_iconImageView) {
         
         UIImageView *imageview = [UIImageView new];
-        imageview.frame = self.frame;
-        _imageView = imageview;
+        imageview.frame = CGRectMake(0, 0, 50, 50);
+        imageview.contentMode = UIViewContentModeScaleAspectFill;
+        imageview.layer.masksToBounds = YES;
+        
+        _iconImageView = imageview;
         
     }
     
-    return _imageView;
+    return _iconImageView;
+}
+
+
+- (UILabel *)titlesLabel{
+    
+    if (!_titlesLabel) {
+        
+        UILabel *label = [UILabel new];
+        label.frame = CGRectMake(0, 30, 50, 20);
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor blackColor];
+        label.font = [UIFont systemFontOfSize:13.0];
+        
+        _titlesLabel = label;
+        
+        
+    }
+    return _titlesLabel;
 }
 
 @end
