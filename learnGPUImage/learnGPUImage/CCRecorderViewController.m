@@ -320,6 +320,32 @@
     CCFilterModel *filter36 = [[CCFilterModel alloc] initWithName:@"晕影" filter:VignetteFilter];
     [_filtersArray addObject:filter36];
     
+    //凸起失真，鱼眼效果
+    GPUImageBulgeDistortionFilter *BulgeDistortionFilter = [GPUImageBulgeDistortionFilter new];
+    CCFilterModel *filter37 = [[CCFilterModel alloc] initWithName:@"鱼眼效果" filter:BulgeDistortionFilter];
+    [_filtersArray addObject:filter37];
+    
+    //收缩失真，凹面镜
+    GPUImagePinchDistortionFilter *PinchDistortionFilter = [GPUImagePinchDistortionFilter new];
+    CCFilterModel *filter38 = [[CCFilterModel alloc] initWithName:@"凹面镜" filter:PinchDistortionFilter];
+    [_filtersArray addObject:filter38];
+    
+    //漩涡，中间形成卷曲的画面
+    GPUImageSwirlFilter *SwirlFilter = [GPUImageSwirlFilter new];
+    CCFilterModel *filter39 = [[CCFilterModel alloc] initWithName:@"漩涡" filter:SwirlFilter];
+    [_filtersArray addObject:filter39];
+    
+    //浮雕效果，带有点3d的感觉
+    GPUImageEmbossFilter *EmbossFilter = [GPUImageEmbossFilter new];
+    CCFilterModel *filter40 = [[CCFilterModel alloc] initWithName:@"浮雕" filter:EmbossFilter];
+    [_filtersArray addObject:filter40];
+    
+    //像素圆点花样
+    GPUImagePolkaDotFilter *PolkaDotFilter = [GPUImagePolkaDotFilter new];
+    CCFilterModel *filter41 = [[CCFilterModel alloc] initWithName:@"像素圆点" filter:PolkaDotFilter];
+    [_filtersArray addObject:filter41];
+    
+    
 }
 
 #pragma mark - view
