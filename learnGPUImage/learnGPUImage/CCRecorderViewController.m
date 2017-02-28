@@ -130,6 +130,196 @@
     GammaFilter.gamma = 2;
     CCFilterModel *filter5 = [[CCFilterModel alloc] initWithName:@"伽马线" filter:GammaFilter];
     [_filtersArray addObject:filter5];
+    
+    //反色
+    GPUImageColorInvertFilter *ColorInvertFilter = [GPUImageColorInvertFilter new];
+    CCFilterModel *filter6 = [[CCFilterModel alloc] initWithName:@"反色" filter:ColorInvertFilter];
+    [_filtersArray addObject:filter6];
+    
+    //褐色（怀旧）
+    GPUImageSepiaFilter *SepiaFilter = [GPUImageSepiaFilter new];
+    CCFilterModel *filter7 = [[CCFilterModel alloc] initWithName:@"怀旧" filter:SepiaFilter];
+    [_filtersArray addObject:filter7];
+    
+    //色阶
+    GPUImageLevelsFilter *LevelsFilter = [GPUImageLevelsFilter new];
+    [LevelsFilter setMin:0.6 gamma:0.3 max:0.7 minOut:0.2 maxOut:0.3];
+    CCFilterModel *filter8 = [[CCFilterModel alloc] initWithName:@"色阶" filter:LevelsFilter];
+    [_filtersArray addObject:filter8];
+    
+    //灰度
+    GPUImageGrayscaleFilter *GrayscaleFilter = [GPUImageGrayscaleFilter new];
+    CCFilterModel *filter9 = [[CCFilterModel alloc] initWithName:@"灰度" filter:GrayscaleFilter];
+    [_filtersArray addObject:filter9];
+    
+    //RGB
+    GPUImageRGBFilter *RGBFilter = [GPUImageRGBFilter new];
+    RGBFilter.red = 0.6;
+    RGBFilter.green = 0.4;
+    RGBFilter.blue = 0.5;
+    CCFilterModel *filter10 = [[CCFilterModel alloc] initWithName:@"RGB" filter:RGBFilter];
+    [_filtersArray addObject:filter10];
+    
+    //单色
+    GPUImageMonochromeFilter *MonochromeFilter = [GPUImageMonochromeFilter new];
+    [MonochromeFilter setColorRed:0.6 green:0.3 blue:0.2];
+    CCFilterModel *filter11 = [[CCFilterModel alloc] initWithName:@"单色" filter:MonochromeFilter];
+    [_filtersArray addObject:filter11];
+    
+    //不透明度
+    GPUImageOpacityFilter *OpacityFilter = [GPUImageOpacityFilter new];
+    OpacityFilter.opacity = 0.5;
+    CCFilterModel *filter12 = [[CCFilterModel alloc] initWithName:@"透明度" filter:OpacityFilter];
+    [_filtersArray addObject:filter12];
+    
+    //提亮阴影
+    GPUImageHighlightShadowFilter *HighlightShadowFilter = [GPUImageHighlightShadowFilter new];
+    HighlightShadowFilter.shadows = 0.6;
+    HighlightShadowFilter.highlights = 0.5;
+    CCFilterModel *filter13 = [[CCFilterModel alloc] initWithName:@"提亮阴影" filter:HighlightShadowFilter];
+    [_filtersArray addObject:filter13];
+    
+    //色彩替换（替换亮部和暗部色彩）
+    GPUImageFalseColorFilter *FalseColorFilter = [GPUImageFalseColorFilter new];
+    CCFilterModel *filter14 = [[CCFilterModel alloc] initWithName:@"色彩替换" filter:FalseColorFilter];
+    [_filtersArray addObject:filter14];
+    
+    //色度
+    GPUImageHueFilter *HueFilter = [GPUImageHueFilter new];
+    HueFilter.hue = 200;
+    CCFilterModel *filter15 = [[CCFilterModel alloc] initWithName:@"色度" filter:HueFilter];
+    [_filtersArray addObject:filter15];
+    
+    //色度键
+    GPUImageChromaKeyFilter *ChromaKeyFilter = [GPUImageChromaKeyFilter new];
+    [ChromaKeyFilter setColorToReplaceRed:0.9 green:0.3 blue:0.1];
+    ChromaKeyFilter.smoothing = 0.6;
+    ChromaKeyFilter.thresholdSensitivity = 0.7;
+    CCFilterModel *filter16 = [[CCFilterModel alloc] initWithName:@"色度键" filter:ChromaKeyFilter];
+    [_filtersArray addObject:filter16];
+  
+    //白平横
+    GPUImageWhiteBalanceFilter *WhiteBalanceFilter = [GPUImageWhiteBalanceFilter new];
+    WhiteBalanceFilter.temperature = 110;
+    WhiteBalanceFilter.tint = 2;
+    CCFilterModel *filter17 = [[CCFilterModel alloc] initWithName:@"白平横" filter:WhiteBalanceFilter];
+    [_filtersArray addObject:filter17];
+    
+    //形状变化
+    GPUImageTransformFilter *TransformFilter = [GPUImageTransformFilter new];
+    TransformFilter.affineTransform =CGAffineTransformMakeRotation(M_PI);
+    CCFilterModel *filter18 = [[CCFilterModel alloc] initWithName:@"形状变化" filter:TransformFilter];
+    [_filtersArray addObject:filter18];
+    
+    //剪裁
+    GPUImageCropFilter *CropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:CGRectMake(0.2, 0.2, 0.6, 0.6)];
+    CCFilterModel *filter19 = [[CCFilterModel alloc] initWithName:@"剪裁" filter:CropFilter];
+    [_filtersArray addObject:filter19];
+    
+    //锐化
+    GPUImageSharpenFilter *SharpenFilter = [GPUImageSharpenFilter new];
+    SharpenFilter.sharpness = 4;
+    CCFilterModel *filter20 = [[CCFilterModel alloc] initWithName:@"锐化" filter:SharpenFilter];
+    [_filtersArray addObject:filter20];
+    
+    //反遮罩锐化
+    GPUImageUnsharpMaskFilter *UnsharpMaskFilter = [GPUImageUnsharpMaskFilter new];
+    UnsharpMaskFilter.blurRadiusInPixels = 10;
+    UnsharpMaskFilter.intensity = 0.4;
+    CCFilterModel *filter21 = [[CCFilterModel alloc] initWithName:@"反遮罩锐化" filter:UnsharpMaskFilter];
+    [_filtersArray addObject:filter21];
+    
+    //Sobel边缘检测算法
+    GPUImageSobelEdgeDetectionFilter *SobelEdgeDetectionFilter = [GPUImageSobelEdgeDetectionFilter new];
+    SobelEdgeDetectionFilter.texelWidth = 2;
+    SobelEdgeDetectionFilter.texelHeight = 2;
+    SobelEdgeDetectionFilter.edgeStrength = 2;
+    CCFilterModel *filter22 = [[CCFilterModel alloc] initWithName:@"边缘检测" filter:SobelEdgeDetectionFilter];
+    [_filtersArray addObject:filter22];
+    
+    //高斯模糊
+    GPUImageGaussianBlurFilter *aussianBlurFilter = [GPUImageGaussianBlurFilter new];
+    aussianBlurFilter.texelSpacingMultiplier = 2;
+    aussianBlurFilter.blurRadiusInPixels = 3;
+    CCFilterModel *filter23 = [[CCFilterModel alloc] initWithName:@"高斯模糊" filter:aussianBlurFilter];
+    [_filtersArray addObject:filter23];
+
+    
+    //高斯模糊，选择部分清晰
+    GPUImageGaussianSelectiveBlurFilter *GaussianSelectiveBlurFilter = [GPUImageGaussianSelectiveBlurFilter new];
+    GaussianSelectiveBlurFilter.excludeCirclePoint = CGPointMake(100, 100);
+    CCFilterModel *filter24 = [[CCFilterModel alloc] initWithName:@"高斯模糊" filter:GaussianSelectiveBlurFilter];
+    [_filtersArray addObject:filter24];
+    
+    //双边模糊
+    GPUImageBilateralFilter *BilateralFilter = [GPUImageBilateralFilter new];
+    BilateralFilter.distanceNormalizationFactor = 0.2;
+    CCFilterModel *filter25 = [[CCFilterModel alloc] initWithName:@"双边模糊" filter:BilateralFilter];
+    [_filtersArray addObject:filter25];
+    
+    //彩色模糊
+    GPUImageRGBOpeningFilter *RGBOpeningFilter = [[GPUImageRGBOpeningFilter alloc] initWithRadius:3];
+    CCFilterModel *filter26 = [[CCFilterModel alloc] initWithName:@"彩色模糊" filter:RGBOpeningFilter];
+    [_filtersArray addObject:filter26];
+    
+    //图像黑白化，并有大量噪点
+    GPUImageLocalBinaryPatternFilter *LocalBinaryPatternFilter = [GPUImageLocalBinaryPatternFilter new];
+    CCFilterModel *filter27 = [[CCFilterModel alloc] initWithName:@"黑白" filter:LocalBinaryPatternFilter];
+    [_filtersArray addObject:filter27];
+    
+    //素描
+    GPUImageSketchFilter *SketchFilter = [GPUImageSketchFilter new];
+    CCFilterModel *filter28 = [[CCFilterModel alloc] initWithName:@"素描" filter:SketchFilter];
+    [_filtersArray addObject:filter28];
+    
+    //阀值素描，形成有噪点的素描
+    GPUImageThresholdSketchFilter *ThresholdSketchFilter = [GPUImageThresholdSketchFilter new];
+    CCFilterModel *filter29 = [[CCFilterModel alloc] initWithName:@"阀值素描" filter:ThresholdSketchFilter];
+    [_filtersArray addObject:filter29];
+    
+    //卡通效果（黑色粗线描边）
+    GPUImageToonFilter *ToonFilter = [GPUImageToonFilter new];
+    ToonFilter.threshold = 0.2;
+    ToonFilter.quantizationLevels = 10;
+    CCFilterModel *filter30 = [[CCFilterModel alloc] initWithName:@"卡通效果" filter:ToonFilter];
+    [_filtersArray addObject:filter30];
+    
+    //相比上面的效果更细腻，上面是粗旷的画风
+    GPUImageSmoothToonFilter *SmoothToonFilter = [GPUImageSmoothToonFilter new];
+    SmoothToonFilter.threshold = 0.2;
+    SmoothToonFilter.quantizationLevels = 10;
+    CCFilterModel *filter31 = [[CCFilterModel alloc] initWithName:@"细腻卡通" filter:SmoothToonFilter];
+    [_filtersArray addObject:filter31];
+    
+    //桑原(Kuwahara)滤波,水粉画的模糊效果；处理时间比较长，慎用
+    GPUImageKuwaharaFilter *KuwaharaFilter = [GPUImageKuwaharaFilter new];
+    KuwaharaFilter.radius = 7;
+    CCFilterModel *filter32 = [[CCFilterModel alloc] initWithName:@"桑原滤波" filter:KuwaharaFilter];
+    [_filtersArray addObject:filter32];
+    
+    //像素化
+    GPUImagePixellateFilter *PixellateFilter = [GPUImagePixellateFilter new];
+    PixellateFilter.fractionalWidthOfAPixel = 0.02;
+    CCFilterModel *filter33 = [[CCFilterModel alloc] initWithName:@"像素化" filter:PixellateFilter];
+    [_filtersArray addObject:filter33];
+    
+    //交叉线阴影，形成黑白网状画面
+    GPUImageCrosshatchFilter *CrosshatchFilter = [GPUImageCrosshatchFilter new];
+    CrosshatchFilter.crossHatchSpacing = 0.03;
+    CrosshatchFilter.lineWidth = 0.003;
+    CCFilterModel *filter34 = [[CCFilterModel alloc] initWithName:@"交叉线" filter:CrosshatchFilter];
+    [_filtersArray addObject:filter34];
+    
+    //色彩丢失，模糊（类似监控摄像效果）
+    GPUImageColorPackingFilter *ColorPackingFilter = [GPUImageColorPackingFilter new];
+    CCFilterModel *filter35 = [[CCFilterModel alloc] initWithName:@"色彩丢失" filter:ColorPackingFilter];
+    [_filtersArray addObject:filter35];
+    
+    //晕影，形成黑色圆形边缘，突出中间图像的效果
+    GPUImageVignetteFilter *VignetteFilter = [GPUImageVignetteFilter new];
+    CCFilterModel *filter36 = [[CCFilterModel alloc] initWithName:@"晕影" filter:VignetteFilter];
+    [_filtersArray addObject:filter36];
+    
 }
 
 #pragma mark - view

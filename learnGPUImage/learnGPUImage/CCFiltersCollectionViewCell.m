@@ -53,7 +53,7 @@
         label.frame = CGRectMake(0, 30, 50, 20);
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = [UIColor blackColor];
-        label.font = [UIFont systemFontOfSize:13.0];
+        label.font = [UIFont systemFontOfSize:12.0];
         
         _titlesLabel = label;
         
