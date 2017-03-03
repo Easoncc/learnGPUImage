@@ -11,6 +11,7 @@
 		4212B85A1E641B8400BD664C /* CCRecorderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4212B8591E641B8400BD664C /* CCRecorderViewController.m */; };
 		4212B85E1E64317D00BD664C /* GPUImageBeautifyFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4212B85D1E64317D00BD664C /* GPUImageBeautifyFilter.m */; };
 		4212B8611E64390100BD664C /* CCFiltersCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4212B8601E64390100BD664C /* CCFiltersCollectionViewCell.m */; };
+		4249BA2F1E66A09B00A5EAC6 /* CCOutputMovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4249BA2E1E66A09B00A5EAC6 /* CCOutputMovieViewController.m */; };
 		4284EAB91E5EE8E3000FC186 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4284EAB81E5EE8E3000FC186 /* main.m */; };
 		4284EABC1E5EE8E3000FC186 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4284EABB1E5EE8E3000FC186 /* AppDelegate.m */; };
 		4284EABF1E5EE8E3000FC186 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4284EABE1E5EE8E3000FC186 /* ViewController.m */; };
@@ -26,6 +27,8 @@
 		4212B85D1E64317D00BD664C /* GPUImageBeautifyFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPUImageBeautifyFilter.m; sourceTree = "<group>"; };
 		4212B85F1E64390100BD664C /* CCFiltersCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFiltersCollectionViewCell.h; sourceTree = "<group>"; };
 		4212B8601E64390100BD664C /* CCFiltersCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFiltersCollectionViewCell.m; sourceTree = "<group>"; };
+		4249BA2D1E66A09B00A5EAC6 /* CCOutputMovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCOutputMovieViewController.h; sourceTree = "<group>"; };
+		4249BA2E1E66A09B00A5EAC6 /* CCOutputMovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCOutputMovieViewController.m; sourceTree = "<group>"; };
 		4284EAB41E5EE8E3000FC186 /* learnGPUImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = learnGPUImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4284EAB81E5EE8E3000FC186 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4284EABA1E5EE8E3000FC186 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -61,24 +64,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4212B8571E6419A100BD664C /* Features */ = {
+		4212B8571E6419A100BD664C /* Filter */ = {
 			isa = PBXGroup;
 			children = (
 				4212B8581E641B8400BD664C /* CCRecorderViewController.h */,
 				4212B8591E641B8400BD664C /* CCRecorderViewController.m */,
+				4212B85C1E64317D00BD664C /* GPUImageBeautifyFilter.h */,
+				4212B85D1E64317D00BD664C /* GPUImageBeautifyFilter.m */,
 				4212B85F1E64390100BD664C /* CCFiltersCollectionViewCell.h */,
 				4212B8601E64390100BD664C /* CCFiltersCollectionViewCell.m */,
 			);
-			name = Features;
+			name = Filter;
 			sourceTree = "<group>";
 		};
-		4212B85B1E64315D00BD664C /* help */ = {
+		4249BA2C1E66A05700A5EAC6 /* outputMovie */ = {
 			isa = PBXGroup;
 			children = (
-				4212B85C1E64317D00BD664C /* GPUImageBeautifyFilter.h */,
-				4212B85D1E64317D00BD664C /* GPUImageBeautifyFilter.m */,
+				4249BA2D1E66A09B00A5EAC6 /* CCOutputMovieViewController.h */,
+				4249BA2E1E66A09B00A5EAC6 /* CCOutputMovieViewController.m */,
 			);
-			name = help;
+			name = outputMovie;
 			sourceTree = "<group>";
 		};
 		4284EAAB1E5EE8E3000FC186 = {
@@ -102,8 +107,8 @@
 		4284EAB61E5EE8E3000FC186 /* learnGPUImage */ = {
 			isa = PBXGroup;
 			children = (
-				4212B85B1E64315D00BD664C /* help */,
-				4212B8571E6419A100BD664C /* Features */,
+				4249BA2C1E66A05700A5EAC6 /* outputMovie */,
+				4212B8571E6419A100BD664C /* Filter */,
 				4284EABA1E5EE8E3000FC186 /* AppDelegate.h */,
 				4284EABB1E5EE8E3000FC186 /* AppDelegate.m */,
 				4284EABD1E5EE8E3000FC186 /* ViewController.h */,
@@ -262,6 +267,7 @@
 				4212B8611E64390100BD664C /* CCFiltersCollectionViewCell.m in Sources */,
 				4284EABF1E5EE8E3000FC186 /* ViewController.m in Sources */,
 				4284EABC1E5EE8E3000FC186 /* AppDelegate.m in Sources */,
+				4249BA2F1E66A09B00A5EAC6 /* CCOutputMovieViewController.m in Sources */,
 				4284EAB91E5EE8E3000FC186 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,6 +389,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = UERK7QRRRZ;
 				INFOPLIST_FILE = learnGPUImage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cc.learnGPUImage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -396,6 +403,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = UERK7QRRRZ;
 				INFOPLIST_FILE = learnGPUImage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cc.learnGPUImage;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -8,11 +8,14 @@
 
 #import "ViewController.h"
 #import "CCRecorderViewController.h"
+#import "CCOutputMovieViewController.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic ,strong) UITableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *array;
+
+
 @end
 
 @implementation ViewController
@@ -23,7 +26,7 @@
     self.navigationItem.title = @"GPUImage";
     
     [self.view addSubview:self.tableView];
-    _array = [NSMutableArray arrayWithObjects:@"one", nil];
+    _array = [NSMutableArray arrayWithObjects:@"滤镜",@"视频输出", nil];
     
 }
 
@@ -81,6 +84,13 @@
     switch (indexPath.row) {
         case 0:{
             CCRecorderViewController *recorder = [CCRecorderViewController new];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:recorder];
+            [self.navigationController presentViewController:nav animated:YES completion:nil];
+            
+        }
+            break;
+        case 1:{
+            CCOutputMovieViewController *recorder = [CCOutputMovieViewController new];
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:recorder];
             [self.navigationController presentViewController:nav animated:YES completion:nil];
             
