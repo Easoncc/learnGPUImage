@@ -173,7 +173,7 @@
 				TargetAttributes = {
 					4284EAB31E5EE8E3000FC186 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = UERK7QRRRZ;
+						DevelopmentTeam = 6AS4N82Q9E;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -387,7 +387,7 @@
 			baseConfigurationReference = ACF53C0DCC1BAA5ED2EBE0D2 /* Pods-learnGPUImage.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UERK7QRRRZ;
+				DEVELOPMENT_TEAM = 6AS4N82Q9E;
 				INFOPLIST_FILE = learnGPUImage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -401,7 +401,7 @@
 			baseConfigurationReference = 971EF8B0A89686628CC87AFA /* Pods-learnGPUImage.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UERK7QRRRZ;
+				DEVELOPMENT_TEAM = 6AS4N82Q9E;
 				INFOPLIST_FILE = learnGPUImage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

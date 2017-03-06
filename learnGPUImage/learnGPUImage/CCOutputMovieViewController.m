@@ -21,7 +21,7 @@
 @property (nonatomic ,strong) GPUImageMovieWriter *movieWriter;
 @property (nonatomic ,strong) UIButton *recorderButton;
 @property (nonatomic ,assign) BOOL isRecordering;
-@property (nonatomic ,strong) GPUImageDissolveBlendFilter *dissolveFilter;
+
 @end
 
 @implementation CCOutputMovieViewController
@@ -51,49 +51,20 @@
     self.videoRecorder.outputImageOrientation = UIInterfaceOrientationPortrait;
     self.videoRecorder.horizontallyMirrorFrontFacingCamera = YES;
     
-    _dissolveFilter = [[GPUImageDissolveBlendFilter alloc] init];
-    [_dissolveFilter setMix:0.5];
-    
-    UIImage *image = [UIImage imageNamed:@"3"];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    
-    UIView *subView = [[UIView alloc] initWithFrame:self.view.frame];
-    subView.backgroundColor = [UIColor clearColor];
-    imageView.center = CGPointMake(subView.bounds.size.width / 2, 30);
-    [subView addSubview:imageView];
-    
-    GPUImageUIElement *uielement = [[GPUImageUIElement alloc] initWithView:subView];
-    
-    
-    NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
+    long time = [[NSDate date] timeIntervalSince1970];
+    NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Movie_%ld.m4v",time]];
     unlink([pathToMovie UTF8String]);
     NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
-    
     
     self.movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(720, 1280)];
     self.movieWriter.shouldPassthroughAudio = YES;
     self.movieWriter.encodingLiveVideo = YES;
     self.videoRecorder.audioEncodingTarget = self.movieWriter;
-    
-    GPUImageFilter* progressFilter = [[GPUImageFilter alloc] init];
-    
-    [self.videoRecorder addTarget:progressFilter];
-    [progressFilter addTarget:_dissolveFilter];
-    [uielement addTarget:_dissolveFilter];
-    [_dissolveFilter addTarget:self.videoView];
-//    [_dissolveFilter addTarget:self.movieWriter];
+
+    [self.videoRecorder addTarget:self.videoView];
     
     [self.videoRecorder startCameraCapture];
-    
-    
-    [progressFilter setFrameProcessingCompletionBlock:^(GPUImageOutput *output, CMTime time) {
-        CGRect frame = imageView.frame;
-//        frame.origin.x += 1;
-        frame.origin.y += 1;
-        imageView.frame = frame;
-        [uielement updateWithTimestamp:time];
-    }];
-    
+
 }
 
 #pragma mark - view
@@ -152,17 +123,25 @@
 }
 
 - (void)recorderButtonClick{
+    
     if (_isRecordering) {
         
-        [_dissolveFilter removeAllTargets];
+        [self.videoRecorder removeTarget:self.movieWriter];
         [self.movieWriter finishRecording];
         _isRecordering = NO;
         [self.recorderButton setTitle:@"停止" forState:UIControlStateNormal];
         
-//        NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
-//        unlink([pathToMovie UTF8String]);
-//        NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
-//        
+        long time = [[NSDate date] timeIntervalSince1970];
+        NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Movie_%ld.m4v",time]];
+        unlink([pathToMovie UTF8String]);
+        NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
+        
+        self.movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(720, 1280)];
+        self.movieWriter.shouldPassthroughAudio = YES;
+        self.movieWriter.encodingLiveVideo = YES;
+        self.videoRecorder.audioEncodingTarget = self.movieWriter;
+        
+//
 //        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 //        if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(pathToMovie))
 //        {
@@ -188,8 +167,7 @@
         
     }else{
         
-        
-        [_dissolveFilter addTarget:self.movieWriter];
+        [self.videoRecorder addTarget:self.movieWriter];
         
         [self.movieWriter startRecording];
         _isRecordering = YES;
