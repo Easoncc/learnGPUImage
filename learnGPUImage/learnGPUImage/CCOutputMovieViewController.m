@@ -9,7 +9,7 @@
 #import "CCOutputMovieViewController.h"
 #import <GPUImage.h>
 #import <AssetsLibrary/ALAssetsLibrary.h>
-
+#import "GPUImageBeautifyFilter.h"
 
 @interface CCOutputMovieViewController ()
 
@@ -21,6 +21,13 @@
 @property (nonatomic ,strong) GPUImageMovieWriter *movieWriter;
 @property (nonatomic ,strong) UIButton *recorderButton;
 @property (nonatomic ,assign) BOOL isRecordering;
+@property (nonatomic ,strong) GPUImageBeautifyFilter *beautifyFilter;
+@property (nonatomic ,strong) NSMutableArray *urlArray;
+@property (nonatomic ,strong) NSString *url;
+
+@property (nonatomic ,strong) NSTimer *timer;
+@property (nonatomic ,assign) float allTime;
+@property (nonatomic ,strong) UILabel *timeLabel;
 
 @end
 
@@ -30,10 +37,12 @@
     [super viewDidLoad];
     
     self.navigationController.navigationBarHidden = YES;
+    self.urlArray = [NSMutableArray new];
     
     [self.view addSubview:self.videoView];
     [self.view addSubview:self.backButton];
     [self.view addSubview:self.recorderButton];
+    [self.view addSubview:self.timeLabel];
     
     [self initRecorder];
 }
@@ -55,13 +64,17 @@
     NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Movie_%ld.m4v",time]];
     unlink([pathToMovie UTF8String]);
     NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
-    
+    self.url = pathToMovie;
     self.movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(720, 1280)];
     self.movieWriter.shouldPassthroughAudio = YES;
     self.movieWriter.encodingLiveVideo = YES;
     self.videoRecorder.audioEncodingTarget = self.movieWriter;
+    //美颜
+    _beautifyFilter = [GPUImageBeautifyFilter new];
 
-    [self.videoRecorder addTarget:self.videoView];
+    
+    [self.videoRecorder addTarget:_beautifyFilter];
+    [_beautifyFilter addTarget:self.videoView];
     
     [self.videoRecorder startCameraCapture];
 
@@ -103,10 +116,13 @@
     if (!_recorderButton) {
         
         UIButton *button = [UIButton new];
-        button.frame = CGRectMake(20, 300, 50, 50);
-        button.titleLabel.font = [UIFont systemFontOfSize:12.0];
-        button.layer.cornerRadius = 25;
+        
+        button.frame = CGRectMake(self.view.frame.size.width/2-80/2, self.view.frame.size.height*0.8, 80, 80);
+        button.titleLabel.font = [UIFont systemFontOfSize:15.0];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        button.layer.cornerRadius = 40;
         button.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+        [button setTitle:@"开始" forState:UIControlStateNormal];
         [button addTarget:self action:@selector(recorderButtonClick) forControlEvents:UIControlEventTouchUpInside];
         
         _recorderButton = button;
@@ -114,6 +130,19 @@
     }
     
     return _recorderButton;
+}
+
+- (UILabel *)timeLabel{
+    if (!_timeLabel) {
+        
+        UILabel *label = [UILabel new];
+        label.frame = CGRectMake(0, self.recorderButton.frame.origin.y-40, self.view.frame.size.width, 20);
+        label.textColor = [UIColor whiteColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        _timeLabel = label;
+        
+    }
+    return  _timeLabel;
 }
 
 #pragma mark - action
@@ -126,15 +155,18 @@
     
     if (_isRecordering) {
         
-        [self.videoRecorder removeTarget:self.movieWriter];
+        [self.urlArray addObject:self.url];
+        [self stopTimer];
+        [_beautifyFilter removeTarget:self.movieWriter];
         [self.movieWriter finishRecording];
         _isRecordering = NO;
-        [self.recorderButton setTitle:@"停止" forState:UIControlStateNormal];
+        [self.recorderButton setTitle:@"开始" forState:UIControlStateNormal];
         
         long time = [[NSDate date] timeIntervalSince1970];
         NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Movie_%ld.m4v",time]];
         unlink([pathToMovie UTF8String]);
         NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
+        self.url = pathToMovie;
         
         self.movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(720, 1280)];
         self.movieWriter.shouldPassthroughAudio = YES;
@@ -167,14 +199,30 @@
         
     }else{
         
-        [self.videoRecorder addTarget:self.movieWriter];
-        
+        [_beautifyFilter addTarget:self.movieWriter];
+        [self startTimer];
         [self.movieWriter startRecording];
         _isRecordering = YES;
         
-        [self.recorderButton setTitle:@"录制中" forState:UIControlStateNormal];
+        [self.recorderButton setTitle:@"停止" forState:UIControlStateNormal];
     }
     
+}
+
+- (void)startTimer{
+    _timer = [NSTimer timerWithTimeInterval:0.1 target:self selector:@selector(timeAction) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+   
+}
+
+- (void)stopTimer{
+    [_timer invalidate];
+    _timer = nil;
+}
+
+- (void)timeAction{
+    self.allTime += 0.1;
+    self.timeLabel.text = [NSString stringWithFormat:@"%.1f",self.allTime];
 }
 
 @end
